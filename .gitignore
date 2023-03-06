@@ -1,0 +1,6 @@
+# Project exclude paths
+/.gradle/
+/authmicro/build/
+/authmicro/build/classes/java/main/
+/usermicro/build/
+/usermicro/build/classes/java/main/

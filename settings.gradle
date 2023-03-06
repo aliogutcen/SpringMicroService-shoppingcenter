@@ -1,0 +1,4 @@
+rootProject.name = 'shoppingcenter'
+include 'authmicro'
+include 'usermicro'
+
