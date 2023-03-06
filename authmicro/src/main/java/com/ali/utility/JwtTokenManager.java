@@ -15,7 +15,7 @@ import java.util.Optional;
 public class JwtTokenManager {
     private final String password = "${PASSWORD}";
 
-
+//token gen
     public Optional<String> generateJwtToken(Long id) {
         String token;
         long extraTime = 1000L * 60 * 15;
