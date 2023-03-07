@@ -49,6 +49,7 @@ public class AuthService extends ServiceManager<Auth, Long> {
         if (optionalAuth.isEmpty()) throw new AuthMicroServiceException(ErrorType.TOKEN_VALID_ERROR);
         optionalAuth.get().setEstatus(EStatus.ACTIVE);
         update(optionalAuth.get());
+        userProfileManager.activationUserProfileStatus(IAuthMapper.INSTANCE.toUserProfileActivateStatus(optionalAuth.get()));
     }
 
     public Optional<String> loginAuth(LoginAuthRequestDto dto) {
@@ -63,6 +64,14 @@ public class AuthService extends ServiceManager<Auth, Long> {
         if (optionalAuth.isEmpty()) throw new AuthMicroServiceException(ErrorType.AUTH_NOT_FOUND);
         optionalAuth.get().setMail(dto.getMail());
         optionalAuth.get().setUsername(dto.getUsername());
+        update(optionalAuth.get());
+        return true;
+    }
+
+    public Boolean deleteAuth(Long id) {
+        Optional<Auth> optionalAuth = findById(id);
+        if (optionalAuth.isEmpty()) throw new AuthMicroServiceException(ErrorType.AUTH_NOT_FOUND);
+        optionalAuth.get().setEstatus(EStatus.DELETED);
         update(optionalAuth.get());
         return true;
     }

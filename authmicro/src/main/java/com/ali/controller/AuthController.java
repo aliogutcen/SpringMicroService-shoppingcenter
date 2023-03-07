@@ -32,14 +32,20 @@ public class AuthController {
         return ResponseEntity.ok(true);
     }
 
-    @PostMapping
+    @PostMapping(LOGIN)
     public ResponseEntity<Optional<String>> loginAuth(@RequestBody LoginAuthRequestDto dto) {
         return ResponseEntity.ok(authService.loginAuth(dto));
     }
 
     @PutMapping(UPDATE)
-    public ResponseEntity<Boolean> updateAuth(@RequestBody UpdateAuthRequestDto dto){
+    public ResponseEntity<Boolean> updateAuth(@RequestBody UpdateAuthRequestDto dto) {
         return ResponseEntity.ok(authService.updateAuth(dto));
+    }
+
+
+    @DeleteMapping(DELETE + "/{id}")
+    public ResponseEntity<Boolean> deleteAuth(@PathVariable Long id) {
+        return ResponseEntity.ok(authService.deleteAuth(id));
     }
 
 

@@ -2,6 +2,7 @@ package com.ali.mapper;
 
 import com.ali.dto.request.AuthRegisterRequestDto;
 import com.ali.dto.request.UpdateAuthRequestDto;
+import com.ali.dto.request.UserProfileActivateStatus;
 import com.ali.dto.request.UserProfileRegisterDto;
 import com.ali.dto.response.ActivateCodeGeneratorResponseDto;
 import com.ali.repository.entity.Auth;
@@ -24,4 +25,6 @@ public interface IAuthMapper {
 
     @Mapping(target = "id", source = "authid")
     Auth toUpdateAuth(final UpdateAuthRequestDto dto);
+    @Mapping(target = "authid", source = "id")
+    UserProfileActivateStatus toUserProfileActivateStatus(final Auth auth);
 }
