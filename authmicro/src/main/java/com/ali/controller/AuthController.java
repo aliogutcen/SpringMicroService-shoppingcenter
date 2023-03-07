@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 import static com.ali.constant.EndPoints.*;
 
 @RestController
@@ -33,7 +35,7 @@ public class AuthController {
     }
 
     @PostMapping
-    public ResponseEntity<?> loginAuth(@RequestBody LoginAuthRequestDto dto) {
+    public ResponseEntity<Optional<String>> loginAuth(@RequestBody LoginAuthRequestDto dto) {
         return ResponseEntity.ok(authService.loginAuth(dto));
     }
 
