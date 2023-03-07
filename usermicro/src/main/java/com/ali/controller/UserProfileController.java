@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import static com.ali.constant.EndPoints.*;
 
 @RestController
-@RequestMapping(USER) //localhost:8091/v1/api/user
+@RequestMapping(USER)
 @RequiredArgsConstructor
 public class UserProfileController {
 

@@ -1,5 +1,6 @@
 package com.ali.repository.entity;
 
+import com.ali.repository.enums.ERole;
 import com.ali.repository.enums.EStatus;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -27,6 +28,9 @@ public class UserProfile extends BaseEntity {
     String age;
 
     String about;
+
+    @Enumerated(EnumType.STRING)
+    ERole erole;
 
     @Enumerated(EnumType.STRING)
     @Builder.Default

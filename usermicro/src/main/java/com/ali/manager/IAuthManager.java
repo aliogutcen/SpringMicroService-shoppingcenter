@@ -19,8 +19,8 @@ import static com.ali.constant.EndPoints.UPDATE;
 public interface IAuthManager {
 
     @PutMapping(UPDATE)
-    public ResponseEntity<Boolean> updateAuth(@RequestBody UpdateAuthRequestDto dto);
+    ResponseEntity<Boolean> updateAuth(@RequestBody UpdateAuthRequestDto dto);
 
     @DeleteMapping(DELETE + "/{id}")
-    public ResponseEntity<Boolean> deleteAuth(@PathVariable Long id);
+    ResponseEntity<Boolean> deleteAuth(@PathVariable Long id);
 }

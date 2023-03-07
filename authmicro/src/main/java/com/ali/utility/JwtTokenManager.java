@@ -2,6 +2,8 @@ package com.ali.utility;
 
 import com.ali.exception.AuthMicroServiceException;
 import com.ali.exception.ErrorType;
+import com.ali.repository.enums.ERole;
+import com.ali.repository.enums.EStatus;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -15,11 +17,12 @@ import java.util.Optional;
 public class JwtTokenManager {
     private final String password = "${PASSWORD}";
 
-    public Optional<String> generateJwtToken(Long id) {
+    public Optional<String> generateJwtToken(Long id, ERole role) {
         String token;
         long extraTime = 1000L * 60 * 15;
         token = JWT.create().withAudience()
                 .withClaim("id", id)
+                .withClaim("role", String.valueOf(role))
                 .withIssuer("admin")
                 .withIssuedAt(new Date())
                 .withExpiresAt(new Date(System.currentTimeMillis() + extraTime))

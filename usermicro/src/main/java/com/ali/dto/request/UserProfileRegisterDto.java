@@ -1,5 +1,6 @@
 package com.ali.dto.request;
 
+import com.ali.repository.enums.ERole;
 import lombok.*;
 
 @Data
@@ -15,4 +16,6 @@ public class UserProfileRegisterDto {
     String username;
 
     String mail;
+
+    ERole erole;
 }

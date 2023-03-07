@@ -55,7 +55,7 @@ public class AuthService extends ServiceManager<Auth, Long> {
     public Optional<String> loginAuth(LoginAuthRequestDto dto) {
         Optional<Auth> optionalAuth = authRepository.findOptionalByUsernameAndPassword(dto.getUsername(), dto.getPassword());
         if (optionalAuth.isEmpty()) throw new AuthMicroServiceException(ErrorType.LOGIN_FAILED);
-        return jwtTokenManager.generateJwtToken(optionalAuth.get().getId());
+        return jwtTokenManager.generateJwtToken(optionalAuth.get().getId(),optionalAuth.get().getErole());
     }
 
     public Boolean updateAuth(UpdateAuthRequestDto dto) {

@@ -17,8 +17,8 @@ import static com.ali.constant.EndPoints.REGISTER;
 public interface IUserProfileManager {
 
     @PostMapping(REGISTER)
-    public ResponseEntity<?> registerUserProfile(@RequestBody UserProfileRegisterDto dto);
+    ResponseEntity<?> registerUserProfile(@RequestBody UserProfileRegisterDto dto);
 
     @PostMapping(ACTIVATION)
-    public ResponseEntity<?> activationUserProfileStatus(@RequestBody UserProfileActivateStatus userProfileActivateStatus);
+    ResponseEntity<?> activationUserProfileStatus(@RequestBody UserProfileActivateStatus userProfileActivateStatus);
 }
