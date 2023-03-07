@@ -10,7 +10,6 @@
         </processorPath>
         <module name="shoppingcenter.authmicro.main" />
         <module name="shoppingcenter.main" />
-        <module name="shoppingcenter.configserver.main" />
         <module name="shoppingcenter.usermicro.main" />
         <module name="shoppingcenter.configservergit.main" />
       </profile>

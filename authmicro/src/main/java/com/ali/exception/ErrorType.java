@@ -27,7 +27,9 @@ public enum ErrorType {
 
     INTERNAL_ERROR(3000,"Sunucuda beklenmeyen hata", INTERNAL_SERVER_ERROR),
 
-    LOGIN_FAILED(2301,"Şifre ya da kullanıcı adı yanlış",INTERNAL_SERVER_ERROR);
+    LOGIN_FAILED(2301,"Şifre ya da kullanıcı adı yanlış",INTERNAL_SERVER_ERROR),
+
+    AUTH_NOT_FOUND(2302,"Auth bulunamadı",BAD_REQUEST);
     private int code;
 
     private String message;

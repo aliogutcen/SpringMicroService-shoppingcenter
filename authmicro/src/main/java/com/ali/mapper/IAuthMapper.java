@@ -1,6 +1,7 @@
 package com.ali.mapper;
 
 import com.ali.dto.request.AuthRegisterRequestDto;
+import com.ali.dto.request.UpdateAuthRequestDto;
 import com.ali.dto.request.UserProfileRegisterDto;
 import com.ali.dto.response.ActivateCodeGeneratorResponseDto;
 import com.ali.repository.entity.Auth;
@@ -13,9 +14,14 @@ import org.mapstruct.factory.Mappers;
 public interface IAuthMapper {
 
     IAuthMapper INSTANCE = Mappers.getMapper(IAuthMapper.class);
+
     Auth toAuthRegister(final AuthRegisterRequestDto dto);
+
     ActivateCodeGeneratorResponseDto activateCodeGeneratorResponseDto(final Auth auth);
-    @Mapping(target = "authid",source = "id")
+
+    @Mapping(target = "authid", source = "id")
     UserProfileRegisterDto toUserProfileRegister(final Auth auth);
 
+    @Mapping(target = "id", source = "authid")
+    Auth toUpdateAuth(final UpdateAuthRequestDto dto);
 }

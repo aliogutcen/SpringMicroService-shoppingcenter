@@ -7,5 +7,6 @@ public class EndPoints {
     public static final String AUTH = VERSION + API + "/auth";
     public static final String REGISTER = "register";
     public static final String ACTIVATION = "active";
+    public static final String UPDATE = "update";
 
 }

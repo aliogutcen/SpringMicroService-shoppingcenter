@@ -3,14 +3,12 @@ package com.ali.controller;
 import com.ali.dto.request.AuthActivationRequestDto;
 import com.ali.dto.request.AuthRegisterRequestDto;
 import com.ali.dto.request.LoginAuthRequestDto;
+import com.ali.dto.request.UpdateAuthRequestDto;
 import com.ali.dto.response.ActivateCodeGeneratorResponseDto;
 import com.ali.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -37,6 +35,11 @@ public class AuthController {
     @PostMapping
     public ResponseEntity<Optional<String>> loginAuth(@RequestBody LoginAuthRequestDto dto) {
         return ResponseEntity.ok(authService.loginAuth(dto));
+    }
+
+    @PutMapping(UPDATE)
+    public ResponseEntity<Boolean> updateAuth(@RequestBody UpdateAuthRequestDto dto){
+        return ResponseEntity.ok(authService.updateAuth(dto));
     }
 
 

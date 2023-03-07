@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/authmicro/shoppingcenter.authmicro.main.iml" filepath="$PROJECT_DIR$/.idea/modules/authmicro/shoppingcenter.authmicro.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/configserver/shoppingcenter.configserver.main.iml" filepath="$PROJECT_DIR$/.idea/modules/configserver/shoppingcenter.configserver.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/configservergit/shoppingcenter.configservergit.main.iml" filepath="$PROJECT_DIR$/.idea/modules/configservergit/shoppingcenter.configservergit.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/usermicro/shoppingcenter.usermicro.main.iml" filepath="$PROJECT_DIR$/.idea/modules/usermicro/shoppingcenter.usermicro.main.iml" />
     </modules>
   </component>
