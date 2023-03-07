@@ -10,6 +10,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/authmicro" />
+            <option value="$PROJECT_DIR$/configserver" />
+            <option value="$PROJECT_DIR$/configservergit" />
             <option value="$PROJECT_DIR$/usermicro" />
           </set>
         </option>
