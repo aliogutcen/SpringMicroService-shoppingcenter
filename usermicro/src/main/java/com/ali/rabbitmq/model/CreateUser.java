@@ -15,5 +15,5 @@ public class CreateUser  implements Serializable {
 
     String username;
 
-    String email;
+    String mail;
 }

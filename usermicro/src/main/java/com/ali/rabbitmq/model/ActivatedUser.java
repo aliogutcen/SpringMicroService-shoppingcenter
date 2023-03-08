@@ -1,5 +1,6 @@
 package com.ali.rabbitmq.model;
 
+import com.ali.repository.enums.EStatus;
 import lombok.*;
 
 import java.io.Serializable;
@@ -9,11 +10,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CreateUser implements Serializable {
+public class ActivatedUser implements Serializable {
 
     Long authid;
 
-    String username;
-
-    String mail;
+    EStatus estatus;
 }

@@ -9,8 +9,9 @@ import com.ali.exception.AuthMicroServiceException;
 import com.ali.exception.ErrorType;
 import com.ali.manager.IUserProfileManager;
 import com.ali.mapper.IAuthMapper;
+import com.ali.rabbitmq.model.ActivatedUser;
 import com.ali.rabbitmq.model.CreateUser;
-import com.ali.rabbitmq.producer.CreateUserProducer;
+import com.ali.rabbitmq.producer.UserProducer;
 import com.ali.repository.IAuthRepository;
 import com.ali.repository.entity.Auth;
 import com.ali.repository.enums.EStatus;
@@ -25,16 +26,16 @@ import java.util.Optional;
 public class AuthService extends ServiceManager<Auth, Long> {
 
     private final IAuthRepository authRepository;
-    private final IUserProfileManager userProfileManager;
-    private final CreateUserProducer createUserProducer;
+
+    private final UserProducer userProducer;
     private final JwtTokenManager jwtTokenManager;
 
-    public AuthService(IAuthRepository authRepository, IUserProfileManager userProfileManager, JwtTokenManager jwtTokenManager, CreateUserProducer createUserProducer) {
+    public AuthService(IAuthRepository authRepository, IUserProfileManager userProfileManager, JwtTokenManager jwtTokenManager, UserProducer userProducer) {
         super(authRepository);
         this.authRepository = authRepository;
-        this.userProfileManager = userProfileManager;
         this.jwtTokenManager = jwtTokenManager;
-        this.createUserProducer = createUserProducer;
+        this.userProducer = userProducer;
+
     }
 
     public ActivateCodeGeneratorResponseDto registerAuth(AuthRegisterRequestDto dto) {
@@ -43,7 +44,7 @@ public class AuthService extends ServiceManager<Auth, Long> {
             auth.setActivateCode(ActivateCodeGenerator.codeGenerator());
             save(auth);
             CreateUser createUser = IAuthMapper.INSTANCE.toCreateUser(auth);
-            createUserProducer.createSendMessage(createUser);
+            userProducer.createSendMessage(createUser);
             // userProfileManager.registerUserProfile(IAuthMapper.INSTANCE.toUserProfileRegister(auth));
             return IAuthMapper.INSTANCE.activateCodeGeneratorResponseDto(auth);
         } else throw new AuthMicroServiceException(ErrorType.AUTH_PASSWORD_ERROR);
@@ -54,7 +55,11 @@ public class AuthService extends ServiceManager<Auth, Long> {
         if (optionalAuth.isEmpty()) throw new AuthMicroServiceException(ErrorType.TOKEN_VALID_ERROR);
         optionalAuth.get().setEstatus(EStatus.ACTIVE);
         update(optionalAuth.get());
-        userProfileManager.activationUserProfileStatus(IAuthMapper.INSTANCE.toUserProfileActivateStatus(optionalAuth.get()));
+        userProducer.updateSendMessage(ActivatedUser.builder()
+                .authid(optionalAuth.get().getId())
+                .estatus(optionalAuth.get().getEstatus())
+                .build());
+        // userProfileManager.activationUserProfileStatus(IAuthMapper.INSTANCE.toUserProfileActivateStatus(optionalAuth.get()));
     }
 
     public Optional<String> loginAuth(LoginAuthRequestDto dto) {
@@ -62,7 +67,6 @@ public class AuthService extends ServiceManager<Auth, Long> {
         if (optionalAuth.isEmpty()) throw new AuthMicroServiceException(ErrorType.LOGIN_FAILED);
         return jwtTokenManager.generateJwtToken(optionalAuth.get().getId(), optionalAuth.get().getErole());
     }
-
     public Boolean updateAuth(UpdateAuthRequestDto dto) {
 
         Optional<Auth> optionalAuth = findById(dto.getAuthid());
@@ -72,7 +76,6 @@ public class AuthService extends ServiceManager<Auth, Long> {
         update(optionalAuth.get());
         return true;
     }
-
     public Boolean deleteAuth(Long id) {
         Optional<Auth> optionalAuth = findById(id);
         if (optionalAuth.isEmpty()) throw new AuthMicroServiceException(ErrorType.AUTH_NOT_FOUND);

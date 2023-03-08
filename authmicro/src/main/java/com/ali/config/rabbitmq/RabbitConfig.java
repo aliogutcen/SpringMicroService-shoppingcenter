@@ -25,10 +25,19 @@ public class RabbitConfig {
         return new Queue(authQueque);
     }
 
+    @Bean
+    Queue updateAuthQueque() {
+        return new Queue(authQuequeActivated);
+    }
 
 
     @Bean
-    Binding bindingCreateAuth(final DirectExchange exchange, final Queue queue) {
-        return BindingBuilder.bind(queue).to(exchange).with(keyAuth);
+    Binding bindingCreateAuth(DirectExchange exchange, Queue createAuthQueque) {
+        return BindingBuilder.bind(createAuthQueque).to(exchange).with(keyAuth);
+    }
+
+    @Bean
+    Binding bindingUpdateAuth(DirectExchange exchange, Queue updateAuthQueque) {
+        return BindingBuilder.bind(updateAuthQueque).to(exchange).with(keyAuthActivated);
     }
 }

@@ -3,7 +3,7 @@ package com.ali.mapper;
 import com.ali.dto.request.AuthRegisterRequestDto;
 import com.ali.dto.request.UpdateAuthRequestDto;
 import com.ali.dto.request.UserProfileActivateStatus;
-import com.ali.dto.request.UserProfileRegisterDto;
+
 import com.ali.dto.response.ActivateCodeGeneratorResponseDto;
 import com.ali.rabbitmq.model.CreateUser;
 import com.ali.repository.entity.Auth;
