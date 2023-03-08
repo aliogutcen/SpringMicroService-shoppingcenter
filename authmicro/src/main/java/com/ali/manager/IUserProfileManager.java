@@ -1,7 +1,6 @@
 package com.ali.manager;
 
 import com.ali.dto.request.UserProfileActivateStatus;
-import com.ali.dto.request.UserProfileRegisterDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,9 +14,6 @@ import static com.ali.constant.EndPoints.REGISTER;
         name = "user-profile-manager",url = "http://localhost:8081/v1/api/user",decode404 = true
 )
 public interface IUserProfileManager {
-
-    @PostMapping(REGISTER)
-    ResponseEntity<?> registerUserProfile(@RequestBody UserProfileRegisterDto dto);
 
     @PostMapping(ACTIVATION)
     ResponseEntity<?> activationUserProfileStatus(@RequestBody UserProfileActivateStatus userProfileActivateStatus);

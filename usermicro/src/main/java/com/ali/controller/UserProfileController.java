@@ -19,11 +19,6 @@ public class UserProfileController {
 
     private final UserProfileService userProfileService;
 
-    @PostMapping(REGISTER)
-    public ResponseEntity<?> registerUserProfile(@RequestBody UserProfileRegisterDto userProfileRegisterDto) {
-        return ResponseEntity.ok(userProfileService.registerUserProfile(userProfileRegisterDto));
-    }
-
     @PostMapping(ACTIVATION)
     public ResponseEntity<?> activationUserProfileStatus(@RequestBody UserProfileActivateStatus userProfileActivateStatus) {
         return ResponseEntity.ok(userProfileService.activationUserProfileStatus(userProfileActivateStatus));

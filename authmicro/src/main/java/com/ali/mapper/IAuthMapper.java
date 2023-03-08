@@ -5,6 +5,7 @@ import com.ali.dto.request.UpdateAuthRequestDto;
 import com.ali.dto.request.UserProfileActivateStatus;
 import com.ali.dto.request.UserProfileRegisterDto;
 import com.ali.dto.response.ActivateCodeGeneratorResponseDto;
+import com.ali.rabbitmq.model.CreateUser;
 import com.ali.repository.entity.Auth;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -20,11 +21,14 @@ public interface IAuthMapper {
 
     ActivateCodeGeneratorResponseDto activateCodeGeneratorResponseDto(final Auth auth);
 
+
     @Mapping(target = "authid", source = "id")
-    UserProfileRegisterDto toUserProfileRegister(final Auth auth);
+    CreateUser toCreateUser(final Auth auth);
+
 
     @Mapping(target = "id", source = "authid")
     Auth toUpdateAuth(final UpdateAuthRequestDto dto);
+
     @Mapping(target = "authid", source = "id")
     UserProfileActivateStatus toUserProfileActivateStatus(final Auth auth);
 }

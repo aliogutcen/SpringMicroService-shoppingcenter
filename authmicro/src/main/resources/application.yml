@@ -6,3 +6,5 @@ spring:
     import: "configserver:"
   application:
     name: auth-micro-service
+
+
