@@ -22,7 +22,6 @@ public class Auth extends BaseEntity {
     String password;
     @Column(unique = true)
     String mail;
-    String activateCode;
     @Builder.Default
     @Enumerated(EnumType.STRING)
     ERole erole = ERole.USER;

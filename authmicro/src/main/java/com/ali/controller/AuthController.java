@@ -22,15 +22,10 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping(REGISTER)
-    public ResponseEntity<ActivateCodeGeneratorResponseDto> registerAuth(@RequestBody AuthRegisterRequestDto dto) {
+    public ResponseEntity<Boolean> registerAuth(@RequestBody AuthRegisterRequestDto dto) {
         return ResponseEntity.ok(authService.registerAuth(dto));
     }
 
-    @PostMapping(ACTIVATION)
-    public ResponseEntity<?> activationAuth(@RequestBody AuthActivationRequestDto dto) {
-        authService.activationAuth(dto);
-        return ResponseEntity.ok(true);
-    }
 
     @PostMapping(LOGIN)
     public ResponseEntity<Optional<String>> loginAuth(@RequestBody LoginAuthRequestDto dto) {

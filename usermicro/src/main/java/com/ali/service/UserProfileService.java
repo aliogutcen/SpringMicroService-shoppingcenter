@@ -8,7 +8,10 @@ import com.ali.dto.response.UpdateUserProfileResponseDto;
 import com.ali.exception.ErrorType;
 import com.ali.exception.UserMicroServiceException;
 import com.ali.manager.IAuthManager;
+import com.ali.manager.IEmailManager;
 import com.ali.mapper.IUserProfileMapper;
+import com.ali.rabbitmq.model.CreateUser;
+import com.ali.rabbitmq.producer.EmailProducer;
 import com.ali.repository.IUserProfileRepository;
 import com.ali.repository.entity.UserProfile;
 import com.ali.repository.enums.EStatus;
@@ -18,6 +21,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+;
+
 @Service
 public class UserProfileService extends ServiceManager<UserProfile, Long> {
 
@@ -25,12 +30,18 @@ public class UserProfileService extends ServiceManager<UserProfile, Long> {
     private final IUserProfileRepository userProfileRepository;
 
     private final JwtTokenManager tokenManager;
+    private final IEmailManager emailManager;
 
-    public UserProfileService(IUserProfileRepository userProfileRepository, IAuthManager authManager, JwtTokenManager tokenManager) {
+    private EmailProducer emailProducer;
+
+    public UserProfileService(IUserProfileRepository userProfileRepository, IAuthManager authManager, JwtTokenManager tokenManager, IEmailManager emailManager, EmailProducer emailProducer) {
         super(userProfileRepository);
         this.userProfileRepository = userProfileRepository;
         this.authManager = authManager;
         this.tokenManager = tokenManager;
+        this.emailManager = emailManager;
+        this.emailProducer = emailProducer;
+
     }
 
     public Boolean registerUserProfile(UserProfileRegisterDto userProfileRegisterDto) {
@@ -45,6 +56,7 @@ public class UserProfileService extends ServiceManager<UserProfile, Long> {
         userProfile.setAge(userProfileUpdateDto.getAge());
         userProfile.setAbout(userProfileUpdateDto.getAbout());
         userProfile.setUsername(userProfileUpdateDto.getUsername());
+        userProfile.setMail(userProfileUpdateDto.getMail());
         update(userProfile);
         authManager.updateAuth(IUserProfileMapper.INSTANCE.toUpdateAuthRequestDto(userProfile));
         return IUserProfileMapper.INSTANCE.toUpdateUserProfileResponseDto(userProfile);
@@ -66,5 +78,12 @@ public class UserProfileService extends ServiceManager<UserProfile, Long> {
         userProfile.setEstatus(userProfileActivateStatus.getEstatus());
         update(userProfile);
         return true;
+    }
+
+
+    public void save(CreateUser createUser) {
+        UserProfile userProfile = IUserProfileMapper.INSTANCE.toUserCreate(createUser);
+        save(userProfile);
+        emailProducer.createMail(IUserProfileMapper.INSTANCE.toMailCreate(userProfile));
     }
 }

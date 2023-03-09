@@ -12,4 +12,6 @@ public interface IUserProfileRepository extends JpaRepository<UserProfile, Long>
     Optional<UserProfile> findOptionalByUsernameOrMail(String username, String mail);
 
     UserProfile findOptionalByAuthid(Long authid);
+
+
 }

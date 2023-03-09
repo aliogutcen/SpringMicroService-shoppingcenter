@@ -9,7 +9,5 @@ import java.util.Optional;
 @Repository
 public interface IAuthRepository extends JpaRepository<Auth, Long> {
 
-    Optional<Auth> findOptionalByIdAndActivateCode(Long id, String activateCode);
-
     Optional<Auth> findOptionalByUsernameAndPassword(String username, String password);
 }

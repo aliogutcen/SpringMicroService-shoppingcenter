@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/authmicro" />
             <option value="$PROJECT_DIR$/configservergit" />
+            <option value="$PROJECT_DIR$/emailmicroservices" />
             <option value="$PROJECT_DIR$/usermicro" />
           </set>
         </option>

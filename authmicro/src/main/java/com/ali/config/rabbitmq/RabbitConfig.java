@@ -15,6 +15,8 @@ public class RabbitConfig {
     private String keyAuth = "key";
     private String keyAuthActivated = "key-activated";
 
+
+
     @Bean
     DirectExchange directExchange() {
         return new DirectExchange(exchange);
@@ -30,7 +32,6 @@ public class RabbitConfig {
         return new Queue(authQuequeActivated);
     }
 
-
     @Bean
     Binding bindingCreateAuth(DirectExchange exchange, Queue createAuthQueque) {
         return BindingBuilder.bind(createAuthQueque).to(exchange).with(keyAuth);
@@ -40,4 +41,6 @@ public class RabbitConfig {
     Binding bindingUpdateAuth(DirectExchange exchange, Queue updateAuthQueque) {
         return BindingBuilder.bind(updateAuthQueque).to(exchange).with(keyAuthActivated);
     }
+
+
 }
